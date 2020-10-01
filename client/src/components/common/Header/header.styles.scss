@@ -1,0 +1,41 @@
+$phone: 500px;
+$tablet: 768px;
+$desktop: 1024px;
+
+.main-header {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  background-color: rgba(196, 196, 196, 0.48);
+  justify-content: space-between;
+  align-items: center;
+  .main-header__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vh;
+    margin-left: 10vw;
+  }
+  .main-header__content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 200px;
+    margin-right: 8vw;
+
+    p {
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+  @media screen and (max-width: $phone) {
+    .main-header__content {
+      width: 120px;
+      margin-right: 4vw;
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}

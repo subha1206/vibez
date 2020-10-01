@@ -1,0 +1,45 @@
+@mixin phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+
+.register-page-container {
+  width: 100vw;
+  height: 100vh;
+
+  .register-page-container__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .register-page-container__content__main {
+      margin: 50px 0 0 0;
+      width: 70vw;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include tablet {
+        width: 85vw;
+      }
+      @include phone {
+        justify-content: center;
+      }
+      .register-page-container__content__main__intro {
+        width: 30vw;
+        @include phone {
+          display: none;
+        }
+        @include tablet {
+          width: 35vw;
+        }
+      }
+    }
+  }
+}
