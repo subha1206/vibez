@@ -1,0 +1,43 @@
+@mixin phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+
+.welcome-page-container {
+  .welcome-page-container__illus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include phone {
+      img {
+        width: 300px;
+      }
+    }
+  }
+  .welcome-page-container__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .welcome-page-container__cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include phone {
+      flex-direction: column;
+    }
+
+    .welcome-page-container__cta__btn {
+      margin: 10px 20px;
+      @include phone {
+        margin: 5px;
+      }
+    }
+  }
+}

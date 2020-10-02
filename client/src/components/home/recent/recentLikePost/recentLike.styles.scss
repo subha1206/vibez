@@ -1,0 +1,42 @@
+.recent-liked-post-container {
+  cursor: default;
+  width: 85%;
+  background-color: #fff;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  margin: 10px 0;
+
+  .recent-liked-post-container__user-container {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    .recent-liked-post-container__user-container__info {
+      padding: 0;
+      margin: 0 5px;
+      p {
+        margin: 0;
+        padding: 0;
+      }
+      .recent-liked-post-container__user-container__info__time {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .recent-liked-post-container__title {
+    margin-left: 10px;
+  }
+  .recent-liked-post-container__cta {
+    margin-right: 20px;
+    text-align: end;
+    p {
+      cursor: pointer !important;
+      color: #0582ca;
+      text-decoration: underline;
+      font-size: 12px;
+    }
+  }
+}
