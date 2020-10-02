@@ -1,0 +1,50 @@
+@mixin phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+
+.header-dropdown-container {
+  width: 230px;
+  height: 250px;
+  background-color: rgba(196, 196, 196, 0.95);
+  // z-index: 10000;
+  margin-top: 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  position: absolute;
+  margin-left: -205px;
+  @include phone {
+    width: 200px;
+    margin-left: -175px;
+  }
+
+  ul {
+    list-style: none;
+
+    padding: 0 30px;
+
+    .header-dropdown-container__item {
+      margin: 25px 0;
+      display: flex;
+      align-items: center;
+      align-self: center;
+      cursor: pointer;
+      p {
+        font-size: 18px;
+        margin: 0 15px;
+        @include phone {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

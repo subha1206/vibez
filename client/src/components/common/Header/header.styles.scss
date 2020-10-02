@@ -22,6 +22,9 @@ $desktop: 1024px;
     align-items: center;
     width: 200px;
     margin-right: 8vw;
+    .main-header__content__item__icon {
+      cursor: pointer;
+    }
 
     p {
       cursor: pointer;

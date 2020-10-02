@@ -1,0 +1,25 @@
+.tag-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 60px;
+  width: 80px;
+  height: 30px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  padding: 0 10px;
+  background-color: #fff;
+  p {
+    font-size: 12px;
+  }
+  .tag-container__icon {
+    cursor: pointer;
+  }
+}
+
+.tag-container.green {
+  background-color: #5ef36d;
+}
