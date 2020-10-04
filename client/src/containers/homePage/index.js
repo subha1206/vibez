@@ -1,11 +1,12 @@
 import React from 'react';
 import { ReactComponent as Plus } from '../../assets/img/common/add.svg';
 import { ReactComponent as Friends } from '../../assets/img/common/friends.svg';
-import { ReactComponent as Post } from '../../assets/img/common/posts.svg';
+import { ReactComponent as PostSvg } from '../../assets/img/common/posts.svg';
 import './home.styles.scss';
 import UserImage from '../../components/home/profile/userImage';
 import Tags from '../../components/common/tags';
 import RecentLiked from '../../components/home/recent/recentLikePost';
+import Post from '../../components/home/feed/post';
 
 const Home = () => {
   return (
@@ -29,7 +30,7 @@ const Home = () => {
           </div>
           <div className="homepage-container__profile__stat__item">
             <div className="homepage-container__profile__stat__item__info">
-              <Post />
+              <PostSvg />
               <p className="info">Posts</p>
               <p>5</p>
             </div>
@@ -56,9 +57,21 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="homepage-container__feed"></div>
+      <div className="homepage-container__feed">
+        <Post />
+        {/* <Post />
+        <Post /> */}
+      </div>
       <div className="homepage-container__recent">
         <div className="homepage-container__recent__post-container">
+          <RecentLiked />
+          <RecentLiked />
+          <RecentLiked />
+          <RecentLiked />
+          <RecentLiked />
+          <RecentLiked />
+          <RecentLiked />
+          <RecentLiked />
           <RecentLiked />
           <RecentLiked />
         </div>
