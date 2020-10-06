@@ -1,4 +1,15 @@
+@mixin phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
 .post-container {
+  position: relative;
   width: 90%;
   height: 20em;
   background-color: rgba(255, 255, 255, 0.5);
@@ -23,8 +34,8 @@
     justify-content: space-between;
     align-items: center;
     .post-container__info__icon {
-      width: 30px;
-      height: 30px;
+      width: 24px;
+      height: 24px;
       cursor: pointer !important;
     }
   }
@@ -33,12 +44,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     .post-container__content__text {
       padding: 0.5em 0.5em 0 1em;
       width: 80%;
-      p {
-        line-height: 18px;
+
+      h2 {
+        height: 3em;
+        overflow: hidden;
       }
+      p {
+        line-height: 1.3em;
+        height: 5em;
+
+        overflow: hidden;
+      }
+    }
+  }
+
+  .post-container__dropdown {
+    position: absolute;
+    top: 2em;
+    right: 2em;
+
+    @include tablet {
+      right: 1em;
+    }
+    @include phone {
+      right: 1em;
+      top: 2.1em;
     }
   }
 
@@ -52,12 +86,48 @@
       height: 30px;
       cursor: pointer;
       margin-right: 2em;
+      position: relative;
+      @include phone {
+        width: 24px;
+      }
+      .post-container__cta__heart__count {
+        position: absolute;
+        right: -1em;
+        top: -0.9em;
+        color: #000;
+        font-size: 12px;
+      }
     }
     .post-container__cta__comment {
       width: 26px;
       height: 26px;
       cursor: pointer;
       margin-top: 0.2em;
+      position: relative;
+      @include phone {
+        width: 22px;
+      }
+      .post-container__cta__comment__count {
+        position: absolute;
+        right: -1.3em;
+        top: -1em;
+        color: #000;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .post-container__show-more {
+    padding: 0;
+    p {
+      cursor: pointer;
+      position: absolute;
+      padding: 0;
+      font-size: 0.9em;
+      text-decoration: underline;
+      color: #0582ca;
+      bottom: 1em;
+      right: 1.5em;
     }
   }
 }

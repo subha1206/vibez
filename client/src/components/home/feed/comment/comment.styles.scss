@@ -1,0 +1,23 @@
+@mixin phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+
+.comment-container {
+  width: 100%;
+  padding: 1em 0;
+
+  .comment-container__content {
+    width: 90%;
+    margin: 0 0 0 2.5em;
+    @include phone {
+      width: 85%;
+    }
+  }
+}
