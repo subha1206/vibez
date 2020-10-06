@@ -1,37 +1,25 @@
 .recent-liked-post-container {
   cursor: default;
   width: 85%;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   -ms-border-radius: 15px;
   -o-border-radius: 15px;
   margin: 10px 0;
-
-  .recent-liked-post-container__user-container {
-    display: flex;
-    align-items: center;
-    padding: 0 5px;
-    .recent-liked-post-container__user-container__info {
-      padding: 0;
-      margin: 0 5px;
-      p {
-        margin: 0;
-        padding: 0;
-      }
-      .recent-liked-post-container__user-container__info__time {
-        font-size: 12px;
-      }
-    }
-  }
-
+  -webkit-box-shadow: 9px 11px 31px -22px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 9px 11px 31px -22px rgba(0, 0, 0, 1);
+  box-shadow: 9px 11px 31px -22px rgba(0, 0, 0, 1);
+  padding: 10px 0 0 0;
   .recent-liked-post-container__title {
     margin-left: 10px;
   }
   .recent-liked-post-container__cta {
+    display: block;
     margin-right: 20px;
     text-align: end;
+    float: right;
     p {
       cursor: pointer !important;
       color: #0582ca;

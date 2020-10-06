@@ -1,8 +1,8 @@
 import React from 'react';
-import { ReactComponent as Home } from '../../../assets/img/header/Home.svg';
-import { ReactComponent as AddFiend } from '../../../assets/img/header/add_friends.svg';
-import { ReactComponent as CreatePost } from '../../../assets/img/header/edit.svg';
-import { ReactComponent as Logout } from '../../../assets/img/header/logout.svg';
+import { ReactComponent as Home } from '../../../../assets/img/header/Home.svg';
+import { ReactComponent as AddFiend } from '../../../../assets/img/header/add_friends.svg';
+import { ReactComponent as CreatePost } from '../../../../assets/img/header/edit.svg';
+import { ReactComponent as Logout } from '../../../../assets/img/header/logout.svg';
 
 import './dropdown.styles.scss';
 

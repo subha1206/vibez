@@ -5,7 +5,7 @@ import { ReactComponent as Menu } from '../../../assets/img/header/menu_20X20.sv
 import { ReactComponent as LogOut } from '../../../assets/img/header/logout_20X20.svg';
 import dummyUser from '../../../assets/img/header/dummyUser.png';
 
-import MenuDropDown from './menuDropDown';
+import MenuDropDown from './dropdown/menuDropDown';
 import LogoutModal from '../Modal/logoutModal';
 
 import './header.styles.scss';

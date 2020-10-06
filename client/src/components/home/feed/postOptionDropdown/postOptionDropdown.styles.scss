@@ -1,0 +1,49 @@
+@mixin phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+
+.post-option-dropdown-container {
+  width: 10em;
+  background-color: rgb(196, 196, 196);
+  z-index: 10000;
+  height: max-content;
+
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  position: relative;
+
+  .post-option-dropdown-container__item {
+    position: relative;
+    height: 2.5em;
+    margin: 0.5em 1em;
+    // padding: 0.5em 0;
+    .post-option-dropdown-container__item__icon {
+      height: 2em;
+      width: 1em !important;
+    }
+    // padding: 0.5em 0;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .post-option-dropdown-container__item__text {
+      height: 2em;
+      //   width: 150px;
+      p {
+        font-size: 14px;
+        margin: 0 15px;
+      }
+    }
+  }
+}

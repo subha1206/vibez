@@ -10,10 +10,10 @@
 }
 
 .modal-container {
-  z-index: 500;
+  z-index: 1000 !important;
   height: 200px;
   width: 350px;
-  background-color: rgba(196, 196, 196, 0.8);
+  background-color: rgba(196, 196, 196, 0.95);
   border-radius: 15px;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
