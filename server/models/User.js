@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema({
     unique: [true, 'Email already in use, please use a different email ID'],
     validate: [isEmail, 'Please provide a valid email ID'],
   },
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
   userImage: {
     type: String,
   },
@@ -33,6 +38,7 @@ const userSchema = new mongoose.Schema({
       },
     },
   },
+  passwordChangeAt: Date,
   createdAt: {
     type: Date,
     default: Date.now(),
@@ -48,9 +54,31 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.methods.checkPassword = async function (clientPass, userPass) {
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
+userSchema.methods.comparePasswordWithDB = async function (
+  clientPass,
+  userPass
+) {
   return await bcrypt.compare(clientPass, userPass);
 };
+
+userSchema.methods.checkIfPasswordChanged = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+  return false;
+};
+
 
 const User = mongoose.model('User', userSchema);
 
