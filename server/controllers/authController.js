@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const AppError = require('../utils/AppError');
 const catchAsyncError = require('../utils/catchAsyncError');
+const sendEmail = require('../utils/email');
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -40,7 +41,14 @@ exports.signUp = catchAsyncError(async (req, res) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
+
   createAndSendToken(newUser, 201, req, res);
+  await sendEmail({
+    userName: newUser.name,
+    type: 'welcome',
+    email: newUser.email,
+    subject: 'Welcome to Chat And Build',
+  });
 });
 
 exports.login = catchAsyncError(async (req, res, next) => {

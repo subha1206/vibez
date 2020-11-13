@@ -3,8 +3,7 @@ const Mailgen = require('mailgen');
 
 const sendEmail = async (options) => {
   const transporter = nodemailer.createTransport({
-    service: 'Yahoo',
-    secure: true,
+    service: 'SendinBlue',
     auth: {
       user: process.env.EMAIL_ID,
       pass: process.env.EMAIL_PASSWORD,
@@ -24,17 +23,17 @@ const sendEmail = async (options) => {
 
   let response = {};
 
-  if (options.type === 'Welcome') {
+  if (options.type === 'welcome') {
     response = {
       body: {
         name: options.userName,
-        intro: "Welcome to Mailgen! We're very excited to have you on board.",
+        intro: "Welcome to Chat&Build! We're very excited to have you on board.",
         outro:
           "Need help, or have questions? Just reply to this email, we'd love to help.",
       },
     };
   }
-  if (options.type === 'Password-reset') {
+  if (options.type === 'password-reset') {
     response = {
       body: {
         name: options.userName,
@@ -62,7 +61,7 @@ const sendEmail = async (options) => {
     html: mail,
   };
 
-  await transporter.sendMail(mailOption);
+  await transporter.sendMail(mailOption).catch((err) => console.log(err));
 };
 
 module.exports = sendEmail;
