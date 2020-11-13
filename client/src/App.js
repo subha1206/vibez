@@ -9,11 +9,12 @@ import Home from './containers/homePage';
 function App() {
   return (
     <div className="App">
-      {/* <RegisterPage /> */}
       {/* <ForgotPasswordPage /> */}
       <Header />
-      {/* <WelcomePage /> */}
-      <Home />
+      {/* <RegisterPage /> */}
+
+      <LoginPage />
+      {/* <Home /> */}
     </div>
   );
 }
