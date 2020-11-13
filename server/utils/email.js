@@ -27,7 +27,8 @@ const sendEmail = async (options) => {
     response = {
       body: {
         name: options.userName,
-        intro: "Welcome to Chat&Build! We're very excited to have you on board.",
+        intro:
+          "Welcome to Chat&Build! We're very excited to have you on board.",
         outro:
           "Need help, or have questions? Just reply to this email, we'd love to help.",
       },
@@ -42,13 +43,16 @@ const sendEmail = async (options) => {
           instructions:
             'To get started with the password reset process, please click here:',
           button: {
-            color: '#22BC66', // Optional action button color
+            color: '#0582CA', // Optional action button color
             text: 'Reset password',
             link: options.resetLink,
           },
         },
-        outro:
+        outro: [
+          'Or copy paste the link bellow to your browser',
+          `${options.resetLink}`,
           "Need help, or have questions? Just reply to this email, we'd love to help.",
+        ],
       },
     };
   }
