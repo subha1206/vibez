@@ -11,6 +11,7 @@ const errorHandeler = require('./controllers/errorController');
 
 const app = express();
 app.use(helmet());
+app.use(cors());
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -30,7 +31,6 @@ app.use(
   })
 );
 app.use(mongoSanitize());
-app.use(cors());
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
