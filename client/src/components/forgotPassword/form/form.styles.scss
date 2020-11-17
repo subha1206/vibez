@@ -15,6 +15,7 @@
 }
 
 .forgot-password-form-container {
+  position: relative;
   width: 280px;
   height: 300px;
   border-radius: 20px;
@@ -41,7 +42,7 @@
     input {
       padding: 10px;
       width: 75%;
-      margin: 20px 0 10px 0;
+      margin: 35px 0 0px 0;
       border-radius: 10px;
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
@@ -49,6 +50,13 @@
       -o-border-radius: 10px;
       border: 1px solid #000;
       border-width: 1px;
+    }
+    .forgot-password-form-container__inputs__error--email {
+      font-size: 14px;
+      position: absolute;
+      top: 5.5em;
+      left: 2em;
+      color: crimson;
     }
   }
 

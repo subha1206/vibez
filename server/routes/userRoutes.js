@@ -3,7 +3,7 @@ const rateLimit = require('../utils/rateLimiter');
 const authController = require('../controllers/authController');
 
 router.post('/signup', rateLimit.authLimiter, authController.signUp);
-router.post('/login', rateLimit.loginLimiter, authController.login);
+router.post('/login',  authController.login);
 
 router.post('/forgotPassword', authController.forgotPassowrd);
 router.patch('/resetPassword/:token', authController.resetPassword);
