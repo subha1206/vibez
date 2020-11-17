@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // import { ReactComponent as Welcome } from '../../assets/img/illustrations/welcome.svg';
 import welcome from '../../assets/img/illustrations/welcome.gif';

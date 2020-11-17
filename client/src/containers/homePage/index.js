@@ -8,15 +8,27 @@ import Tags from '../../components/common/tags';
 import RecentLiked from '../../components/home/recent/recentLikePost';
 import Post from '../../components/home/feed/post';
 import PostExpand from '../../components/home/feed/postExpand';
+import AddPost from '../../components/form/addPost';
+import AddFrinedAndTags from '../../components/form/addTagsAndFriends';
 
 import PostOptionDropdown from '../../components/home/feed/postOptionDropdown';
 import UserInfo from '../../components/home/feed/userInfo';
 
 const Home = () => {
   const [uiState, setUistate] = useState(false);
+  const [showAddPost, setShowAddPost] = useState(false);
+  const [showAddFriend, setShowAddFriend] = useState(false);
 
   const handleUIState = () => {
     setUistate(!uiState);
+  };
+
+  const handleShowAddPost = () => {
+    setShowAddPost(!showAddPost);
+  };
+
+  const handleShowAddFriends = () => {
+    setShowAddFriend(!showAddFriend);
   };
   return (
     <>
@@ -36,7 +48,9 @@ const Home = () => {
                 <p className="info">Friends</p>
                 <p>10</p>
               </div>
-              <p className="add">Add Friends</p>
+              <p className="add" onClick={handleShowAddFriends}>
+                Add Friends
+              </p>
             </div>
             <div className="homepage-container__profile__stat__item">
               <div className="homepage-container__profile__stat__item__info">
@@ -44,7 +58,9 @@ const Home = () => {
                 <p className="info">Posts</p>
                 <p>5</p>
               </div>
-              <p className="add">Add Post</p>
+              <p className="add" onClick={handleShowAddPost}>
+                Add Post
+              </p>
             </div>
           </div>
           <div className="homepage-container__profile__tags">
@@ -96,6 +112,15 @@ const Home = () => {
             <RecentLiked />
           </div>
         </div>
+      </div>
+      <div className={`${showAddPost || showAddFriend ? 'back-drop' : ''}`}>
+        {showAddPost ? <AddPost handleShowAddPost={handleShowAddPost} /> : null}
+        {showAddFriend ? (
+          <AddFrinedAndTags
+            handleShowAddFriends={handleShowAddFriends}
+            name="Add Friends"
+          />
+        ) : null}
       </div>
     </>
   );

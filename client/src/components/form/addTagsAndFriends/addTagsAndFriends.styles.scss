@@ -1,0 +1,62 @@
+@mixin phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+
+.add-frinds-container {
+  z-index: 1000 !important;
+  height: 35rem;
+  width: 55rem;
+  background-color: rgba(196, 196, 196, 0.8);
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+
+  @include phone {
+    overflow-y: scroll;
+    // height: 80vh !important;
+    width: 90vw !important;
+  }
+
+  @include tablet {
+    width: 40rem;
+  }
+
+  .add-frinds-container__info {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .add-frinds-container__info__icon {
+      cursor: pointer;
+    }
+    @include phone {
+      padding: 0 17px;
+    }
+  }
+
+  .add-frinds-container__content {
+    // display: flex;
+    // justify-content: center;
+    // font-size: 18px;
+    // font: 700;
+    @include phone {
+      font-size: 14px;
+      padding: 0;
+      justify-content: flex-start;
+      margin: -15px 0 0 18px;
+    }
+  }
+}

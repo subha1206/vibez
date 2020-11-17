@@ -63,14 +63,27 @@ exports.login = catchAsyncError(async (req, res, next) => {
   if (!user || !(await user.comparePasswordWithDB(password, user.password))) {
     return next(new AppError('Incorrect Email or password', 401));
   }
-  createAndSendToken(user, 200, req, res);
+  // createAndSendToken(user, 200, req, res);
 
-  // const token = signToken(user._id);
+  const token = signToken(user._id);
 
-  // res.status(200).json({
-  //   status: 'success',
-  //   token,
-  // });
+  const cookieOpt = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === 'production') cookieOpt.secure = true;
+
+  res.cookie('jwt', token, cookieOpt);
+
+  res.status(200).json({
+    status: 'success',
+    token,
+    user,
+    message: 'Login successfull',
+  });
 });
 
 exports.protectedRoute = catchAsyncError(async (req, res, next) => {
