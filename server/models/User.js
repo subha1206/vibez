@@ -3,50 +3,62 @@ const bcrypt = require('bcrypt');
 const { isEmail } = require('validator');
 const crypto = require('crypto');
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please provide a name'],
-  },
-  email: {
-    type: String,
-    lowercase: true,
-    unique: [true, 'Email already in use, please use a different email ID'],
-    validate: [isEmail, 'Please provide a valid email ID'],
-  },
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-  userImage: {
-    type: String,
-  },
-  tags: [String],
-  password: {
-    type: String,
-    required: [true, 'You must provide a password'],
-    minlength: [8, 'Your password has to be 8 char long'],
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      message: 'Password did not match',
-      validator: function (el) {
-        return el === this.password;
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please provide a name'],
+    },
+    email: {
+      type: String,
+      lowercase: true,
+      unique: [true, 'Email already in use, please use a different email ID'],
+      validate: [isEmail, 'Please provide a valid email ID'],
+    },
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
+    },
+    userImage: {
+      type: String,
+    },
+    tags: [String],
+    password: {
+      type: String,
+      required: [true, 'You must provide a password'],
+      minlength: [8, 'Your password has to be 8 char long'],
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        message: 'Password did not match',
+        validator: function (el) {
+          return el === this.password;
+        },
       },
     },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+      select: false,
+    },
   },
-  passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-    select: false,
-  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+
+userSchema.virtual('posts', {
+  ref: 'Post',
+  localField: '_id',
+  foreignField: 'author',
 });
 
 userSchema.pre('save', async function (next) {
