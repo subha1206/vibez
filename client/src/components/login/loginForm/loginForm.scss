@@ -15,6 +15,7 @@
 }
 
 .login-form-container {
+  position: relative;
   width: 280px;
   height: 300px;
   border-radius: 20px;
@@ -41,7 +42,7 @@
     input {
       padding: 10px;
       width: 75%;
-      margin: 20px 0 10px 0;
+      margin: 25px 0 10px 0;
       border-radius: 10px;
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
@@ -49,6 +50,20 @@
       -o-border-radius: 10px;
       border: 1px solid #000;
       border-width: 1px;
+    }
+    .login-form-container__inputs--error__email {
+      font-size: 14px;
+      position: absolute;
+      top: -0.1em;
+      left: 2em;
+      color: crimson;
+    }
+    .login-form-container__inputs--error__password {
+      font-size: 14px;
+      position: absolute;
+      top: 5.2em;
+      left: 2em;
+      color: crimson;
     }
   }
 
@@ -59,6 +74,10 @@
       padding: 0 30px;
       font-size: 14px;
       cursor: pointer;
+    }
+    p:hover {
+      color: #0582ca;
+      text-decoration: underline;
     }
   }
 

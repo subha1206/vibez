@@ -5,7 +5,7 @@ const userController = require('../controllers/usercontroller');
 const postRouter = require('./postRoutes');
 
 router.post('/signup', rateLimit.authLimiter, authController.signUp);
-router.post('/login', rateLimit.loginLimiter, authController.login);
+router.post('/login',  authController.login);
 
 router.post('/forgotPassword', authController.forgotPassowrd);
 router.patch('/resetPassword/:token', authController.resetPassword);

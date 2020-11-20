@@ -10,8 +10,8 @@
 }
 
 .register-page-container {
-  width: 100vw;
-  height: 100vh;
+  width: 98vw;
+  height: 90vh;
 
   .register-page-container__content {
     display: flex;
@@ -32,7 +32,10 @@
         justify-content: center;
       }
       .register-page-container__content__main__intro {
-        width: 30vw;
+        // -webkit-box-shadow: 9px 11px 31px -22px rgba(0, 0, 0, 1);
+        // -moz-box-shadow: 9px 11px 31px -22px rgba(0, 0, 0, 1);
+        // box-shadow: 9px 11px 31px -22px rgba(0, 0, 0, 1);
+        width: 34vw;
         @include phone {
           display: none;
         }

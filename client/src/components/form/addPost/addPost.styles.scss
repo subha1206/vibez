@@ -1,0 +1,169 @@
+@mixin phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+
+.add-post-container {
+  z-index: 1000 !important;
+  height: 35rem;
+  width: 55rem;
+  background-color: rgba(196, 196, 196, 0.8);
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+
+  @include phone {
+    overflow-y: scroll;
+    // height: 80vh !important;
+    width: 90vw !important;
+  }
+
+  @include tablet {
+    width: 40rem;
+  }
+
+  .add-post-container__info {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .add-post-container__info__icon {
+      cursor: pointer;
+    }
+    @include phone {
+      padding: 0 17px;
+    }
+  }
+
+  .add-post-container__content {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font: 700;
+    @include phone {
+      font-size: 14px;
+      padding: 0;
+      justify-content: flex-start;
+      margin: -15px 0 0 18px;
+    }
+
+    form {
+      input[type='text'] {
+        width: 22rem;
+        height: 2rem;
+        border: none;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        outline: none;
+        padding: 5px 0;
+
+        @include tablet {
+          width: 15rem;
+        }
+        @include phone {
+          width: 75vw;
+        }
+      }
+      #tags {
+        margin-top: 0 !important;
+        width: 22rem;
+        height: 2rem;
+        border: none;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        outline: none;
+        padding: 5px 0;
+
+        @include tablet {
+          width: 15rem;
+        }
+
+        @include phone {
+          width: 75vw !important;
+        }
+      }
+
+      .add-post-container__content__main {
+        display: flex;
+        max-width: 50rem;
+        // align-items: center;
+        justify-content: center;
+        @include tablet {
+          max-width: 35rem;
+        }
+
+        @include phone {
+          display: block;
+          padding: 2rem 0.5rem;
+        }
+        .add-post-container__content__right {
+          width: 50%;
+          margin-right: 2rem;
+          .add-post-container__content__right__container {
+            label {
+              display: block;
+              margin-bottom: 0.5em;
+            }
+          }
+        }
+
+        .add-post-container__content__left {
+          width: 50%;
+
+          @include phone {
+            margin-top: 2rem;
+            width: 75vw !important;
+          }
+        }
+      }
+      .lable-write {
+        @include tablet {
+          margin-bottom: 0rem;
+        }
+        @include phone {
+          margin-bottom: 0rem;
+        }
+        margin-bottom: -0.8rem;
+      }
+      textarea {
+        @include tablet {
+          max-width: 35rem;
+          margin: 1rem 0 2rem 0;
+        }
+        @include phone {
+          width: 75vw !important;
+          margin: 1rem 0 2rem 0;
+        }
+        width: 48rem;
+        margin-top: 2rem;
+        border: none;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        outline: none;
+        padding: 0.5rem;
+        font-size: 16px;
+      }
+    }
+  }
+}

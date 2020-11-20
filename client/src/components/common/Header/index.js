@@ -33,7 +33,7 @@ const Header = ({ isLoggedIn }) => {
       </div>
 
       <div className="main-header__content">
-        {!isLoggedIn ? (
+        {isLoggedIn ? (
           <>
             <div className="main-header__content__item">
               <div className="main-header__content__item__icon">
