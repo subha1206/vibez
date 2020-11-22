@@ -13,7 +13,12 @@ const commentSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
-      required: [true, 'Review must belong to a user.'],
+      required: [true, 'Comment must belong to a user.'],
+    },
+    post: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'Comment must belong to a post.'],
     },
   },
   {
