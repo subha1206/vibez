@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-const sendApiRequest = axios.create({
-  baseURL: '/api/v1/',
-});
+const token = localStorage.getItem('jwt');
 
-export default sendApiRequest;
+axios.defaults.baseURL = '/api/v1/';
+if (token) {
+  axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+}
+
+export default axios.create();

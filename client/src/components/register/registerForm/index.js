@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { isEmail } from 'validator';
 import Button from '../../common/Button';
-import { useHistory } from 'react-router-dom';
-import API_END_POINTS from '../../../services/apiEndpoints';
-import notify from '../../../helper/notify';
-import sendApiRequest from '../../../helper/sendApiRequest';
+import { useHistory, Link } from 'react-router-dom';
+import { register } from '../../../redux/actions/authAction';
+import { useDispatch } from 'react-redux';
 
 // USER_REGISTER
 import './registerForm.styles.scss';
 
 const RegisterForm = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     name: '',
@@ -79,7 +79,7 @@ const RegisterForm = () => {
     }
   };
 
-  const handleRegister = async () => {
+  const handleRegister = () => {
     const emailErr = validateEmail();
     const nameErr = validateName();
     const passwordErr = validatePassword();
@@ -92,27 +92,10 @@ const RegisterForm = () => {
       passwordConfirmErr === ''
     ) {
       setIsLoading(true);
-      try {
-        const res = await sendApiRequest.post(
-          API_END_POINTS.USER_REGISTER,
-          user
-        );
-        notify(res.data.status, 'Sign up successfull');
-        setIsLoading(false);
-        if (res.data.status === 'success') {
-          localStorage.setItem('jwt', res.data.token);
-          history.push('/welcome');
-        }
-      } catch (err) {
-        notify(err.response.data.status, err.response.data.message);
-        setIsLoading(false);
-      }
+      dispatch(register(user, history, setIsLoading));
     }
   };
 
-  const redirectToLogin = () => {
-    history.push('/login');
-  };
   return (
     <div className="register-form-container">
       <div className="register-form-container__inputs">
@@ -165,11 +148,10 @@ const RegisterForm = () => {
           value={user.passwordConfirm}
         />
       </div>
-      <div
-        className="register-form-container__options"
-        onClick={redirectToLogin}
-      >
-        <p>Already have an account?</p>
+      <div className="register-form-container__options">
+        <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>
+          <p>Already have an account?</p>
+        </Link>
       </div>
       <div
         className="register-form-container__button"

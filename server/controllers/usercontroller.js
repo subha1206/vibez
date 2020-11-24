@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const AppError = require('../utils/AppError');
 const catchAsyncError = require('../utils/catchAsyncError');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 exports.getMyCred = (req, res, next) => {
   console.log(req.user.id);
@@ -13,6 +14,24 @@ exports.getMe = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.params.id).populate({
     path: 'posts',
   });
+
+  if (!user) return new AppError('No user found', 404);
+
+  res.status(200).json({
+    status: 'success',
+    data: user,
+  });
+});
+exports.getFeed = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  const following = user.following;
+
+  const test = await following.map(async (person) => {
+    const posts = await User.findById(person);
+    return posts;
+  });
+
+  console.log(test);
 
   if (!user) return new AppError('No user found', 404);
 

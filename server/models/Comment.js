@@ -17,7 +17,7 @@ const commentSchema = new mongoose.Schema(
     },
     post: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User',
+      ref: 'Post',
       required: [true, 'Comment must belong to a post.'],
     },
   },
@@ -27,7 +27,7 @@ const commentSchema = new mongoose.Schema(
   }
 );
 
-commentSchema.pre(/^find/, function (next) {
+commentSchema.pre(/^findById/, function (next) {
   this.populate({
     path: 'user',
     select: 'name userImage',

@@ -32,6 +32,7 @@
 
   @include tablet {
     width: 40rem;
+    height: 80vh !important;
   }
 
   .add-post-container__info {
@@ -153,7 +154,7 @@
           margin: 1rem 0 2rem 0;
         }
         width: 48rem;
-        margin-top: 2rem;
+        margin-top: 1rem;
         border: none;
         border-radius: 10px;
         -webkit-border-radius: 10px;
@@ -164,6 +165,21 @@
         padding: 0.5rem;
         font-size: 16px;
       }
+    }
+
+    .add-post-container_CTA {
+      margin-top: 0.5rem;
+      @include tablet {
+        width: 75vw !important;
+        margin: -1rem 0 2rem 0;
+      }
+      @include phone {
+        width: 75vw !important;
+        margin: 1rem 0 2rem 0;
+      }
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
   }
 }

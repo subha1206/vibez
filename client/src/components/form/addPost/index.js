@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ReactComponent as Close } from '../../../assets/img/common/error 2.svg';
 import Dropzone from '../../common/dropzone';
+import Button from '../../common/Button';
+
 import './addPost.styles.scss';
 
 const AddPost = ({ handleShowAddPost }) => {
+  const [post, setPost] = useState({
+    title: '',
+    description: '',
+    password: '',
+    tags: [],
+  });
+
+  const [titleError, setTitleError] = useState('');
+  const [descError, setDescError] = useState('');
+
   return (
     <div className="add-post-container">
       <div className="add-post-container__info">
@@ -46,6 +58,9 @@ const AddPost = ({ handleShowAddPost }) => {
           </div>
           <p className="lable-write">Describe your thought</p>
           <textarea name="write" id="write" cols="30" rows="8"></textarea>
+          <div className="add-post-container_CTA">
+            <Button color="blue" value="Create" />
+          </div>
         </form>
       </div>
     </div>

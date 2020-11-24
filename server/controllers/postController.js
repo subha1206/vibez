@@ -1,10 +1,13 @@
 const Post = require('../models/Post');
+
+
 const AppError = require('../utils/AppError');
 const catchAsyncError = require('../utils/catchAsyncError');
 
 exports.createPost = catchAsyncError(async (req, res, next) => {
   req.body.author = req.user.id;
   const newPost = await Post.create(req.body);
+  
   res.status(201).json({
     status: 'success',
     message: 'Post created successfully.',
@@ -84,4 +87,3 @@ exports.removeLike = catchAsyncError(async (req, res, next) => {
     status: 'success',
   });
 });
-

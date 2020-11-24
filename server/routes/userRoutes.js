@@ -17,6 +17,7 @@ router.patch(
   authController.updatePassword
 );
 router.get('/me', userController.getMyCred, userController.getMe);
+router.route('/me/feed').get(userController.getMyCred, userController.getFeed);
 router.use('/me/posts', postRouter);
 
 router.route('/:userId').get(userController.getUser);
