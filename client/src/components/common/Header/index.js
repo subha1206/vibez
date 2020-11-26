@@ -15,6 +15,8 @@ import './header.styles.scss';
 const Header = () => {
   const [menuDropDown, setMenuDropDown] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showAddPost, setShowAddPost] = useState(false);
+  const [showAddFriend, setShowAddFriend] = useState(false);
 
   const isLoggedIn = useSelector(
     (state) => state.auth.isAuthenticated,

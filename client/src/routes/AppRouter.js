@@ -17,6 +17,7 @@ const AppRouter = () => {
   return (
     <Switch>
       <ProtectedRoute
+        exact
         comp={Home}
         path="/home"
         isLoggedIn={isLoggedIn}

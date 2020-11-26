@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ReactComponent as Plus } from '../../assets/img/common/add.svg';
 import { ReactComponent as Friends } from '../../assets/img/common/friends.svg';
 import { ReactComponent as PostSvg } from '../../assets/img/common/posts.svg';
@@ -10,17 +10,28 @@ import Post from '../../components/home/feed/post';
 import PostExpand from '../../components/home/feed/postExpand';
 import AddPost from '../../components/form/addPost';
 import AddFrinedAndTags from '../../components/form/addTagsAndFriends';
-
+import { getMe } from '../../redux/actions/userAction';
+import { getOnePost } from '../../redux/actions/postActions';
+import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 import PostOptionDropdown from '../../components/home/feed/postOptionDropdown';
 import UserInfo from '../../components/home/feed/userInfo';
 
 const Home = () => {
-  const [uiState, setUistate] = useState(false);
+  const dispatch = useDispatch();
+
+  const [expandPost, setExpandPost] = useState(false);
+  const [expandUser, setExpandUser] = useState(true);
   const [showAddPost, setShowAddPost] = useState(false);
   const [showAddFriend, setShowAddFriend] = useState(false);
 
-  const handleUIState = () => {
-    setUistate(!uiState);
+  const user = useSelector((state) => state.user, shallowEqual);
+  const currentPost = useSelector(
+    (state) => state.post?.currentPost?.data,
+    shallowEqual
+  );
+
+  const getPost = (postId) => {
+    dispatch(getOnePost(postId, setExpandPost));
   };
 
   const handleShowAddPost = () => {
@@ -30,6 +41,31 @@ const Home = () => {
   const handleShowAddFriends = () => {
     setShowAddFriend(!showAddFriend);
   };
+
+  const showFeed = () => {
+    if (expandUser) {
+      return <UserInfo user={user} />;
+    } else if (expandPost) {
+      return (
+        <PostExpand setExpandPost={setExpandPost} currentPost={currentPost} />
+      );
+    } else {
+      return (
+        <>
+          {user.user?.posts.map((post) => {
+            return <Post key={post.id} getPost={getPost} post={post} />;
+          })}
+        </>
+      );
+    }
+  };
+  useEffect(() => {
+    if (!user.user) {
+      dispatch(getMe());
+    }
+    return () => {};
+  }, []);
+
   return (
     <>
       <div className="homepage-container">
@@ -40,7 +76,7 @@ const Home = () => {
               <Plus />
             </div>
           </div>
-          <h3>Username username</h3>
+          <h3>{user.user?.name}</h3>
           <div className="homepage-container__profile__stat">
             <div className="homepage-container__profile__stat__item">
               <div className="homepage-container__profile__stat__item__info">
@@ -84,19 +120,11 @@ const Home = () => {
           </div>
         </div>
         <div
-          className={`homepage-container__feed ${uiState ? 'scroll_hide' : ''}`}
+          className={`homepage-container__feed ${
+            expandPost ? 'scroll_hide' : ''
+          }`}
         >
-          {/* <Post />
-        <Post /> */}
-
-          {uiState ? (
-            <PostExpand handleUIState={handleUIState} />
-          ) : (
-            <>
-              <Post handleUIState={handleUIState} />
-              <UserInfo />
-            </>
-          )}
+          {showFeed()}
         </div>
         <div className="homepage-container__recent">
           <div className="homepage-container__recent__post-container">

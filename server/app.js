@@ -26,7 +26,7 @@ const limiter = rateLimit({
     'Too many request from your system, please try again after some time',
 });
 
-app.use('/api', limiter);
+// app.use('/api', limiter);
 app.use(
   express.json({
     limit: '10kb',

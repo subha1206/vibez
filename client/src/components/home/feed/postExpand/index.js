@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './postexpand.styles.scss';
-import { ReactComponent as More } from '../../../../assets/img/common/more.svg';
 import { ReactComponent as Back } from '../../../../assets/img/common/left-arrow.svg';
 import { ReactComponent as Heart } from '../../../../assets/img/common/heart.svg';
 import { ReactComponent as CommentIcon } from '../../../../assets/img/common/comments.svg';
@@ -9,52 +8,33 @@ import UserDetails from '../../../common/userDetails';
 import Comment from '../comment';
 import PostOptionDropdown from '../postOptionDropdown';
 
-const PostExpand = ({ handleUIState }) => {
-  const [postDropDown, setPostdropDown] = useState(false);
-
-  const handleDropDown = () => {
-    setPostdropDown(!postDropDown);
-  };
+const PostExpand = ({ setExpandPost, currentPost }) => {
+  console.log(currentPost?.author);
   return (
     <div className="post-expand-container">
       <div className="post-expand-container__content">
         <div
           className="post-expand-container__content__back"
-          onClick={handleUIState}
+          onClick={() => setExpandPost(false)}
         >
           <Back />
         </div>
         <div className="post-expand-container__content__user-info">
-          <UserDetails />
-          <div
+          <UserDetails user={currentPost?.author} />
+          {/* <div
             className="post-expand-container__content__icon"
             onClick={handleDropDown}
           >
             <More />
-          </div>
+          </div> */}
         </div>
-        <div className="post-expand-container__content__dropdown">
+        {/* <div className="post-expand-container__content__dropdown">
           {postDropDown ? <PostOptionDropdown /> : null}
-        </div>
+        </div> */}
         <div className="post-expand-container__content__details">
           <div className="post-expand-container__content__details__text">
-            <h2>This is a example of post tittle</h2>
-            <p>
-              Some caption about the picture In this article we are discussing
-              the Calender Application Project using C. We all have smartphones
-              and laptops in which there is a calendar application present which
-              gives the daily update about date and day. But do you know, how it
-              works? This article will give you a basic overview of How to make
-              a calendar application using C programming. in which there is a
-              calendar application present which gives the daily update about
-              date and day. But do you know, how it works? This article will
-              give you a basic overview of How to make a calendar application
-              using C programming. in which there is a calendar application
-              present which gives the daily update about date and day. But do
-              you know, how it works? This article will give you a basic
-              overview of How to make a calendar application using C
-              programming.
-            </p>
+            <h2>{currentPost?.title}</h2>
+            <p>{currentPost?.description}</p>
           </div>
           <div className="post-expand-container__content__details__image">
             {/* <img
