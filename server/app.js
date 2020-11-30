@@ -23,7 +23,7 @@ const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
   message:
-    'Too many request from your system, please try again after some time!',
+    'Too many request from your system, please try again after some time',
 });
 
 // app.use('/api', limiter);
