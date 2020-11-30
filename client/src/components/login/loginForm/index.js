@@ -1,22 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { isEmail } from 'validator';
 import Button from '../../common/Button';
-import sendApiRequest from '../../../helper/sendApiRequest';
-import notify from '../../../helper/notify';
 import { useHistory } from 'react-router-dom';
+import { login } from '../../../redux/actions/authAction';
+import { useDispatch } from 'react-redux';
 
 import './loginForm.scss';
-import UserContext from '../../../contexts/userContext';
 
 const LoginForm = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-
-  // const [userData, setUserData] = useContext(UserContext);
-  // console.log(userData);
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -46,23 +43,10 @@ const LoginForm = () => {
     }
   };
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     if (user.email !== '' && user.password !== '') {
       setIsLoading(true);
-      try {
-        const res = await sendApiRequest.post('/users/login', user);
-        notify(res.data.status, res.data.message);
-        setIsLoading(false);
-        if (res.data.status === 'success') {
-          localStorage.setItem('jwt', res.data.token);
-          history.push('/welcome');
-        }
-        console.log(res.data, res.status);
-      } catch (err) {
-        console.log(err.response.data);
-        notify(err.response.data.status, err.response.data.message);
-        setIsLoading(false);
-      }
+      dispatch(login(user, history, setIsLoading));
     } else {
       if (user.email === '') setEmailError('Required flied');
       if (user.password === '') setPasswordError('Required flied');
@@ -103,7 +87,6 @@ const LoginForm = () => {
           placeholder="Password"
           onChange={handleChange}
           value={user.password}
-          // onFocus={validatePassword}
           onBlur={validatePassword}
         />
       </div>

@@ -41,16 +41,18 @@
   }
 
   .post-container__content {
+    text-align: left;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    width: 100%;
     .post-container__content__text {
       padding: 0.5em 0.5em 0 1em;
-      width: 80%;
+      width: 89%;
 
-      h2 {
-        height: 3em;
+      h3 {
+        height: 2.5em;
         overflow: hidden;
       }
       p {
@@ -124,10 +126,15 @@
       position: absolute;
       padding: 0;
       font-size: 0.9em;
-      text-decoration: underline;
-      color: #0582ca;
+
       bottom: 1em;
       right: 1.5em;
+
+      &:hover {
+        font-size: 14.5px;
+        text-decoration: underline;
+        color: #0582ca;
+      }
     }
   }
 }

@@ -1,59 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ReactComponent as More } from '../../../../assets/img/common/more.svg';
 import { ReactComponent as Heart } from '../../../../assets/img/common/heart.svg';
 import { ReactComponent as Comments } from '../../../../assets/img/common/comments.svg';
 import './post.styles.scss';
+import { shallowEqual, useSelector } from 'react-redux';
+import { like, disLike } from '../../../../redux/actions/postActions';
+import { useDispatch } from 'react-redux';
 
 // components
 import UserDetails from '../../../common/userDetails';
 import PostOptionDropdown from '../postOptionDropdown';
 
-const Post = ({ handleUIState }) => {
-  const [postDropDown, setPostdropDown] = useState(false);
+const Post = ({ getPost, post }) => {
+  const dispatch = useDispatch();
 
+  const [postDropDown, setPostdropDown] = useState(false);
+  const [ownPost, setOwnPost] = useState(false);
+  const [postSingle] = useState(post);
+
+  const userId = useSelector((state) => state.auth.user._id, shallowEqual);
   const handleDropDown = () => {
     setPostdropDown(!postDropDown);
   };
 
+  const handleLike = () => {
+    dispatch(like(post?._id));
+  };
+  const handleDisLike = () => {
+    dispatch(disLike(post?._id));
+  };
+
+  useEffect(() => {
+    if (post?.author.id === userId) setOwnPost(true);
+    return () => {};
+  }, [postSingle]);
+
   return (
     <div className="post-container">
       <div className="post-container__info">
-        <UserDetails />
+        <UserDetails user={post?.author} />
         <div className="post-container__info__icon" onClick={handleDropDown}>
           <More />
         </div>
       </div>
       <div className="post-container__content">
         <div className="post-container__content__text">
-          <h2>
-            Some header goes here fdsnfjkskjdfjsdkf nkiojfndfnsdikf nbfiknbsnfsd
-            nsdfnsdf nbibdfbs fh hhn dhd nbhofhds njfdndkfs njsdfnn sdnsdf
-            dsnjiosdnbf dsfndsnf
-          </h2>
-          <p>
-            Some caption about the picture In this article we are discussing the
-            Calender Application Project using C. We all have smartphones and
-            laptops in which there is a calendar application present which gives
-            the daily update about date and day. But do you know, how it works?
-            This article will give you a basic overview of How to make a
-            calendar application using C programming.
-          </p>
+          <h3>{post?.title}</h3>
+          <p>{post?.description}</p>
         </div>
       </div>
       <div className="post-container__dropdown">
-        {postDropDown && <PostOptionDropdown />}
+        {postDropDown && (
+          <PostOptionDropdown
+            ownPost={ownPost}
+            postId={post?._id}
+            handleDropDown={handleDropDown}
+          />
+        )}
       </div>
       <div className="post-container__cta">
         <div className="post-container__cta__heart">
-          <Heart />
+          <Heart onClick={handleLike} />
           <div className="post-container__cta__heart__count">23</div>
         </div>
-        <div className="post-container__cta__comment" onClick={handleUIState}>
+        <div
+          className="post-container__cta__comment"
+          onClick={() => getPost(post?._id)}
+        >
           <Comments />
           <div className="post-container__cta__comment__count">23</div>
         </div>
       </div>
-      <div className="post-container__show-more" onClick={handleUIState}>
+      <div
+        className="post-container__show-more"
+        onClick={() => getPost(post?._id)}
+      >
         <p>Show more</p>
       </div>
     </div>

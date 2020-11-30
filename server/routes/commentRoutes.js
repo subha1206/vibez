@@ -1,10 +1,12 @@
-const router = require('express').Router();
+const router = require('express').Router({ mergeParams: true });
 const authController = require('../controllers/authController');
 const commentController = require('../controllers/commentController');
 
-router.use(authController.protectedRoute);
+router.use(authController.protectedRoute, commentController.setPostAndUserID);
+
 router
   .route('/')
-  .post(commentController.setPostAndUserID, commentController.createComment);
+  .post(commentController.createComment)
+  .delete(commentController.deleteComment);
 
 module.exports = router;

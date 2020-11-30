@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { isEmail } from 'validator';
 import Button from '../../common/Button';
-import API_END_POINTS from '../../../services/apiEndpoints';
-import notify from '../../../helper/notify';
-import sendApiRequest from '../../../helper/sendApiRequest';
+import { useHistory } from 'react-router-dom';
+import { forgotPassword } from '../../../redux/actions/authAction';
+import { useDispatch } from 'react-redux';
 
 import './form.styles.scss';
 
 const ForgotpasswordForm = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const [emailError, setEmailError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState({
@@ -31,25 +34,12 @@ const ForgotpasswordForm = () => {
     }
   };
 
-  const handleForgotPassword = async () => {
+  const handleForgotPassword = () => {
     const emailErr = validateEmail();
 
     if (emailErr === '') {
       setIsLoading(true);
-      try {
-        const res = await sendApiRequest.post(
-          API_END_POINTS.USER_FORGOT_PASSWORD,
-          user
-        );
-        notify(
-          res.data.status,
-          'Password reset token send to your Email, please check your email to reset your password'
-        );
-        setIsLoading(false);
-      } catch (err) {
-        notify(err.response.data.status, err.response.data.message);
-        setIsLoading(false);
-      }
+      dispatch(forgotPassword(user, history, setIsLoading));
     }
   };
 

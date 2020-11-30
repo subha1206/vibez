@@ -48,6 +48,18 @@ const userSchema = new mongoose.Schema(
       default: Date.now(),
       select: false,
     },
+    following: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
+    followers: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     toJSON: { virtuals: true },
@@ -61,6 +73,23 @@ userSchema.virtual('posts', {
   foreignField: 'author',
 });
 
+
+
+// userSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'following',
+//     select: '_id name',
+//   });
+//   next();
+// });
+
+// userSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'followers',
+//     select: '_id name',
+//   });
+//   next();
+// });
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 

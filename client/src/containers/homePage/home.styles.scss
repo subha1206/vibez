@@ -55,13 +55,16 @@
           margin-left: 20px;
           color: #0582ca;
           text-decoration: underline;
+          &:hover {
+            font-size: 12.5px;
+          }
         }
         .homepage-container__profile__stat__item__info {
           display: flex;
           align-items: center;
           justify-content: flex-start;
           .info {
-            width: 50px;
+            width: 4em;
           }
           p {
             margin-left: 15px;

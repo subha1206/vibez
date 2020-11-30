@@ -2,6 +2,8 @@ const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/User');
+const Post = require('../models/Post');
+const RecentActivity = require('../models/RecentActivity');
 const AppError = require('../utils/AppError');
 const catchAsyncError = require('../utils/catchAsyncError');
 const sendEmail = require('../utils/email');
@@ -41,6 +43,9 @@ exports.signUp = catchAsyncError(async (req, res) => {
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
+  });
+  await RecentActivity.create({
+    author: newUser._id,
   });
 
   createAndSendToken(newUser, 201, req, res);
