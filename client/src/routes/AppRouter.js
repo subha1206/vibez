@@ -1,7 +1,5 @@
 import React from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
-import { shallowEqual, useSelector } from 'react-redux';
-
+import { Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import LoginPage from '../containers/login';
 import RegisterPage from '../containers/register';
@@ -12,17 +10,10 @@ import ResetPassword from '../containers/resetPassword';
 import UnAuthPage from '../containers/unAuthPage';
 
 const AppRouter = () => {
-  const isLoggedIn = useSelector((state) => state.auth.token, shallowEqual);
-
   return (
     <Switch>
-      <ProtectedRoute
-        exact
-        comp={Home}
-        path="/home"
-        isLoggedIn={isLoggedIn}
-      ></ProtectedRoute>
-      <Route exact path="/login">
+      <ProtectedRoute exact comp={Home} path="/home"></ProtectedRoute>
+      <Route exact path="/">
         <LoginPage />
       </Route>
       <Route exact path="/forgotPassword">
@@ -34,12 +25,7 @@ const AppRouter = () => {
       <Route exact path="/register">
         <RegisterPage />
       </Route>
-      <ProtectedRoute
-        exact
-        comp={WelcomePage}
-        path="/welcome"
-        isLoggedIn={isLoggedIn}
-      ></ProtectedRoute>
+      <ProtectedRoute exact comp={WelcomePage} path="/welcome"></ProtectedRoute>
       <Route exact path="/unAuthorized">
         <UnAuthPage />
       </Route>

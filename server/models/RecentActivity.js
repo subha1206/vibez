@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
-const feedSchema = new mongoose.Schema(
+const recentActivitySchema = new mongoose.Schema(
   {
     author: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
-      required: [true, 'Comment must belong to a user.'],
     },
-    feed: [
+    posts: [
       {
         type: mongoose.Schema.ObjectId,
         ref: 'Post',
@@ -20,13 +19,14 @@ const feedSchema = new mongoose.Schema(
   }
 );
 
-feedSchema.pre('findOne', function (next) {
+recentActivitySchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'feed',
+    path: 'posts',
+    select: 'title -likes author',
   });
   next();
 });
 
-const Feed = mongoose.model('Feed', feedSchema);
+const RecentActivity = mongoose.model('RecentActivity', recentActivitySchema);
 
-module.exports = Feed;
+module.exports = RecentActivity;

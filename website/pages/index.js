@@ -5,7 +5,6 @@ import Info_Follow from '../components/Info_Follow';
 import Info_Enjoy from '../components/Info_Enjoy';
 import Hero from '../components/Hero';
 
-import styles from '../styles/Home.module.css';
 
 export default function Home() {
   return (

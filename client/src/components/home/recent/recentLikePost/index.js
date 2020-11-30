@@ -4,15 +4,16 @@ import './recentLike.styles.scss';
 import UserImage from '../../profile/userImage';
 import UserDetails from '../../../common/userDetails';
 
-const RecentLiked = () => {
+const RecentLiked = ({ post, getPost }) => {
+  console.log(post);
   return (
     <div className="recent-liked-post-container">
-      <UserDetails />
+      <UserDetails user={post?.author} />
       <div className="recent-liked-post-container__title">
-        <p>This is a post title</p>
+        <p>{post?.title}</p>
       </div>
       <div className="recent-liked-post-container__cta">
-        <p>show more</p>
+        <p onClick={() => getPost(post?._id)}>show more</p>
       </div>
     </div>
   );

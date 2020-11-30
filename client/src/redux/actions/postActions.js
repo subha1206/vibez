@@ -66,3 +66,14 @@ export const disLike = (postId) => async (dispatch) => {
     notify(err.response.data.status, err.response.data.message);
   }
 };
+
+export const createComment = (postId, comment) => async (dispatch) => {
+  try {
+    const url = `${apiEndPoints.COMMENT}/${postId}/comment`;
+    const res = await sendApiRequest.post(url, comment);
+    notify(res.data.status, res.data.message);
+    dispatch({ type: postConstants.LIKE_POST });
+  } catch (err) {
+    notify(err.response.data.status, err.response.data.message);
+  }
+};

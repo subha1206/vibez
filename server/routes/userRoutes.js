@@ -17,7 +17,12 @@ router.patch(
   authController.updatePassword
 );
 router.get('/me', userController.getMyCred, userController.getMe);
+router
+  .route('/me/activity')
+  .get(userController.getMyCred, userController.getRecentAct);
 router.route('/me/feed').get(userController.getMyCred, userController.getFeed);
+router.route('/me/findFriends').get(userController.getAllUser);
+
 router.use('/me/posts', postRouter);
 
 router.route('/:userId').get(userController.getUser);

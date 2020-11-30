@@ -9,7 +9,7 @@ export const login = (user, history, setIsLoading) => async (dispatch) => {
     if (res.data.status === 'success') {
       setIsLoading(false);
       localStorage.setItem('jwt', res.data.token);
-      history.push('/');
+      history.push('/home');
       dispatch({ type: authConstant.LOGIN_SUCCESS, payload: res.data });
     }
   } catch (err) {
@@ -51,7 +51,7 @@ export const logout = (data, history) => (dispatch) => {
   //   notify(err.response.data.status, err.response.data.message);
   //   dispatch({ type: authConstant.REGISTER_FAIL });
   // }
-  history.push('/login');
+  history.push('/');
   dispatch({ type: authConstant.LOGOUT });
 };
 
@@ -65,7 +65,7 @@ export const forgotPassword = (user, history, setIsLoading) => async (
       'Password reset token send to your Email, please check your email to reset your password'
     );
     setIsLoading(false);
-    history.push('/login');
+    history.push('/');
     dispatch({ type: authConstant.FORGOT_PASSWORD_SUCCESS });
   } catch (err) {
     setIsLoading(false);

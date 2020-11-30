@@ -73,6 +73,8 @@ userSchema.virtual('posts', {
   foreignField: 'author',
 });
 
+
+
 // userSchema.pre(/^find/, function (next) {
 //   this.populate({
 //     path: 'following',

@@ -6,7 +6,12 @@ import { ReactComponent as Logout } from '../../../../assets/img/header/logout.s
 
 import './dropdown.styles.scss';
 
-const MenuDropDown = ({ handleLogoutModal, handleMenuDropDown }) => {
+const MenuDropDown = ({
+  handleLogoutModal,
+  handleMenuDropDown,
+  handleShowAddPost,
+  handleShowFollow,
+}) => {
   return (
     <div className="header-dropdown-container">
       <ul>
@@ -19,11 +24,17 @@ const MenuDropDown = ({ handleLogoutModal, handleMenuDropDown }) => {
           <Home />
           <p>Home</p>
         </li>
-        <li className="header-dropdown-container__item">
+        <li
+          className="header-dropdown-container__item"
+          onClick={handleShowFollow}
+        >
           <AddFiend />
-          <p>Add Friend</p>
+          <p>Follow humans</p>
         </li>
-        <li className="header-dropdown-container__item">
+        <li
+          className="header-dropdown-container__item"
+          onClick={handleShowAddPost}
+        >
           <CreatePost />
           <p>Create Post</p>
         </li>

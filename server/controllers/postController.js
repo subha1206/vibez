@@ -1,5 +1,8 @@
 const Post = require('../models/Post');
+const User = require('../models/User');
+const Feed = require('../models/Feed');
 
+const RecentActivity = require('../models/RecentActivity');
 
 const AppError = require('../utils/AppError');
 const catchAsyncError = require('../utils/catchAsyncError');
@@ -7,7 +10,20 @@ const catchAsyncError = require('../utils/catchAsyncError');
 exports.createPost = catchAsyncError(async (req, res, next) => {
   req.body.author = req.user.id;
   const newPost = await Post.create(req.body);
-  
+
+  const folow = await User.findById(req.user.id).select('followers');
+  const folowList = folow.followers;
+  folowList.map(async (person) => {
+    await Feed.findOneAndUpdate(
+      { author: person },
+      { $push: { feed: newPost._id } },
+      {
+        new: true,
+        upsert: true, // Make this update into an upsert
+      }
+    );
+  });
+
   res.status(201).json({
     status: 'success',
     message: 'Post created successfully.',
@@ -70,6 +86,12 @@ exports.createLike = catchAsyncError(async (req, res, next) => {
     { _id: postId },
     { $addToSet: { likes: req.user.id } },
     { new: true }
+  );
+
+  await RecentActivity.findOneAndUpdate(
+    { author: req.user.id },
+    { $addToSet: { posts: postId } },
+    { new: true, useFindAndModify: false }
   );
   res.status(200).json({
     status: 'success',

@@ -38,14 +38,14 @@ const Post = ({ getPost, post }) => {
   return (
     <div className="post-container">
       <div className="post-container__info">
-        <UserDetails />
+        <UserDetails user={post?.author} />
         <div className="post-container__info__icon" onClick={handleDropDown}>
           <More />
         </div>
       </div>
       <div className="post-container__content">
         <div className="post-container__content__text">
-          <h2>{post?.title}</h2>
+          <h3>{post?.title}</h3>
           <p>{post?.description}</p>
         </div>
       </div>

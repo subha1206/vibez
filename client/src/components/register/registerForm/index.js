@@ -149,7 +149,7 @@ const RegisterForm = () => {
         />
       </div>
       <div className="register-form-container__options">
-        <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>
+        <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
           <p>Already have an account?</p>
         </Link>
       </div>

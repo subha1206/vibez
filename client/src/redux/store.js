@@ -10,7 +10,7 @@ const initialState = {};
 const persistConfig = {
   key: 'auth',
   storage: storage,
-  whitelist: ['auth', 'user'], // which reducer want to store
+  whitelist: ['auth'], // which reducer want to store
 };
 
 const pReducer = persistReducer(persistConfig, rootReducer);

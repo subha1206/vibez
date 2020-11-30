@@ -6,6 +6,13 @@ const API_END_POINTS = {
   USER_RESET_PASSWORD: '/users/resetPassword',
 
   GET_ME: '/users/me',
+  GET_RECENT_ACTIVITY: '/users/me/activity',
+  GET_FEED: '/users/me/feed',
+  GET_ALL_USER: '/users/me/findFriends',
+
+  FOLLOW: '/users',
+  UNFOLLOW: '/users',
+
   // Post
 
   CREATE_POST: '/users/me/posts',
@@ -14,6 +21,7 @@ const API_END_POINTS = {
   GET_ONE_POST: '/posts',
   LIKE_POST: '/posts',
   DISLIKE_POST: '/posts',
+  COMMENT: '/posts',
 };
 
 export default API_END_POINTS;

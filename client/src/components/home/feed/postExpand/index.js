@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './postexpand.styles.scss';
 import { ReactComponent as Back } from '../../../../assets/img/common/left-arrow.svg';
-import { ReactComponent as Heart } from '../../../../assets/img/common/heart.svg';
-import { ReactComponent as CommentIcon } from '../../../../assets/img/common/comments.svg';
+// import { ReactComponent as Heart } from '../../../../assets/img/common/heart.svg';
+// import { ReactComponent as CommentIcon } from '../../../../assets/img/common/comments.svg';
+
+import { createComment } from '../../../../redux/actions/postActions';
+import { useDispatch } from 'react-redux';
 
 import UserDetails from '../../../common/userDetails';
 import Comment from '../comment';
-import PostOptionDropdown from '../postOptionDropdown';
+// import PostOptionDropdown from '../postOptionDropdown';
 
 const PostExpand = ({ setExpandPost, currentPost }) => {
-  console.log(currentPost?.author);
+  const dispatch = useDispatch();
+  const [comment, setComment] = useState({
+    comment: '',
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setComment({
+      comment: value,
+    });
+  };
+
+  const handleAddComment = (e) => {
+    e.preventDefault();
+    dispatch(createComment(currentPost?._id, comment));
+  };
+
   return (
     <div className="post-expand-container">
       <div className="post-expand-container__content">
@@ -33,7 +52,7 @@ const PostExpand = ({ setExpandPost, currentPost }) => {
         </div> */}
         <div className="post-expand-container__content__details">
           <div className="post-expand-container__content__details__text">
-            <h2>{currentPost?.title}</h2>
+            <h3>{currentPost?.title}</h3>
             <p>{currentPost?.description}</p>
           </div>
           <div className="post-expand-container__content__details__image">
@@ -44,7 +63,7 @@ const PostExpand = ({ setExpandPost, currentPost }) => {
             /> */}
           </div>
         </div>
-        <div className="post-expand-container__content__stat">
+        {/* <div className="post-expand-container__content__stat">
           <div className="post-expand-container__content__stat__icon">
             <Heart />
             <div className="post-expand-container__content__stat__icon__count">
@@ -57,12 +76,21 @@ const PostExpand = ({ setExpandPost, currentPost }) => {
               15
             </div>
           </div>
+        </div> */}
+        <div className="post-expand-container__content__comment--box">
+          <form>
+            <input type="text" name="comment" id="" onChange={handleChange} />
+            <button type="submit" onClick={handleAddComment}>
+              Comment
+            </button>
+          </form>
         </div>
+
         <div className="post-expand-container__content__comments">
-          <p>Comments...</p>
-          <Comment />
-          <Comment />
-          <Comment />
+          <h4>Comments...</h4>
+          {currentPost?.comments.map((comment) => {
+            return <Comment key={comment.id} comment={comment} />;
+          })}
         </div>
       </div>
     </div>

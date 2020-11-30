@@ -1,6 +1,6 @@
 export default function Info_Follow() {
   return (
-    <div className="container mdsm:mx-auto lg:flex ">
+    <div className="container mdsm:mx-auto lg:flex mx-auto">
       <div className="flex-1 mdsm:hidden">
         <div className="w-3/5 container mx-auto">
           <img src="/images/follow.png" alt="Vercel Logo" />
@@ -12,10 +12,11 @@ export default function Info_Follow() {
             Follow real humans
           </p>
           <h2 className="text-3xl text-center lg:text-left">
-            Create/login to an existing account to get started
+            Start following people from live search
           </h2>
           <p className="text-s pt-2 lg:w-3/5 text-center lg:text-left">
-            An account is created with your email and a desired password
+            They are connected with you and you will start reciving posts from
+            them.
           </p>
         </div>
       </div>

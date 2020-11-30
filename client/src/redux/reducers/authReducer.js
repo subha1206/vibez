@@ -1,11 +1,13 @@
+import produce from 'immer';
+
 const initialState = {
   token: localStorage.getItem('jwt'),
-  isAuthenticated: null,
+  isAuthenticated: false,
   isLoading: false,
   user: null,
 };
 
-export default function (state = initialState, action) {
+const reducer = produce((state = initialState, action) => {
   switch (action.type) {
     case 'USER_LOADING':
       return {
@@ -45,4 +47,6 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+});
+
+export default reducer;
