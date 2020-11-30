@@ -14,7 +14,7 @@ const sendEmail = async (options) => {
     theme: 'salted',
     product: {
       // Appears in header & footer of e-mails
-      name: 'Chat&Build',
+      name: 'Vibez',
       link: 'https://mailgen.js/',
       // Optional product logo
       // logo: 'https://mailgen.js/img/logo.png'
@@ -28,7 +28,7 @@ const sendEmail = async (options) => {
       body: {
         name: options.userName,
         intro:
-          "Welcome to Chat&Build! We're very excited to have you on board.",
+          "Welcome to Vibez! We're very excited to have you on board.",
         outro:
           "Need help, or have questions? Just reply to this email, we'd love to help.",
       },
