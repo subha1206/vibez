@@ -15,9 +15,9 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.use(morgan('dev'));
+// }
 
 const limiter = rateLimit({
   max: 100,
@@ -39,14 +39,15 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.send('Hello From vibez');
+});
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/posts', postRouter);
-
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on the server`, 404));
 });
-
 app.use(errorHandeler);
 
 module.exports = app;
